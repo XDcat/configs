@@ -1,7 +1,7 @@
 # 配置文件
 
 ## 修改键盘映射
-> 主要将左ctrl与caps互换，方便使用git
+> 主要将左ctrl与caps互换，方便使用 vim
 
 
 1. windows
