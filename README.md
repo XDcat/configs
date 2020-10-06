@@ -25,3 +25,38 @@
     ```
     3. 在 `.bashrc`中添加`if [ -f ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi`
     
+3. jupyter 中使用vim
+    1. 安装 vim_binding 插件，具体见 https://github.com/lambdalisue/jupyter-vim-binding
+    ```
+    # Create required directory in case (optional)
+    mkdir -p $(jupyter --data-dir)/nbextensions
+    # Clone the repository
+    cd $(jupyter --data-dir)/nbextensions
+    git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
+    # Activate the extension
+    jupyter nbextension enable vim_binding/vim_binding
+    ```
+
+    2. 将左ctrl与caps互换，方便使用 vim
+
+       在`~/.jupyter/custom/custom.js`创建`custom.js`，内容如下所示：
+
+    ```
+    // ctrl [：insert-》vim， vim-》jupyter
+    require([
+      'nbextensions/vim_binding/vim_binding',
+      'base/js/namespace',
+    ], function(vim_binding, ns) {
+      // Add post callback
+      vim_binding.on_ready_callbacks.push(function(){
+        var km = ns.keyboard_manager;
+        // Indicate the key combination to run the commands
+        km.edit_shortcuts.add_shortcut('ctrl-[', CodeMirror.prototype.leaveInsertMode, true);
+        km.edit_shortcuts.add_shortcut('shift-ctrl-[', CodeMirror.prototype.leaveNormalMode, true);
+
+        // Update help
+        km.edit_shortcuts.events.trigger('rebuild.QuickHelp');
+      });
+    });
+    ```
+
