@@ -13,10 +13,10 @@ default_config = {
     "disable_existing_loggers": True,  # 是否禁用任何非根的所有 Logger, 默认 False
     "formatters": {  # 格式化生成器(格式器)
         "default": {
-            "format": "%(asctime)s [%(filename)s %(name)s %(funcName)s %(module)s] <%(levelname)s>: %(message)s",
+            "format": "%(name)s %(asctime)s [%(filename)s %(funcName)s()] <%(levelname)s>: %(message)s",
         },
         "brief": {
-            "format": "[%(name)s] <%(levelname)s>: %(message)s",
+            "format": "%(name)s [%(funcName)s()] <%(levelname)s>: %(message)s",
         }
     },
     "filters": {},  # 过滤器，需要自定义类，一般不会用到
