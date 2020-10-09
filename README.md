@@ -60,3 +60,16 @@
     });
     ```
 
+## python logging
+
+提供两种使用的方式，一个是YAML类型的配置文件`python/log/logconfig.yaml`，还有一个写好的python文件`python/log/logconfig.py`。这里的话推荐，使用python文件的方式，通过调用其中的`setup_logging`函数，提供了默认和两种方式，具体的使用示例，见`/python/log/main.py`。
+
+在实际的使用过程中，可能存在两种情况：
+
+1. 在单个py或ipy文件中使用
+
+   直接参考上述文件`main.py`即可。
+
+2. 在项目中使用
+
+   推荐使用写好的python文件，在入口函数导入`logconfig`函数，并在使用`setup_logging`方法初始化。在项目的其他位置，只需要直接使用`logging.getLogger()`的方式使用。默认会使用到`root`这个`Logger`，如果需要更多的层次，请自定义配置以及使用logging的多层日志结构。
